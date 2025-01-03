@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Auction</title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+
+<body class="bodyblue">
+    <div class="headerdiv">
+        <a href="index.html"><img class="aliguelogo" src="images/aliguelogo.png" /></a>
+        <a href="homepage.html" class="header">Homepage</a>
+        <a href="auction.html" class="header">Auction</a>
+        <a href="teams.html" class="header">Teams</a>
+        <a href="contactus.html" class="header">Contact Us</a>
+    </div>
+    <img id="unsoldstamp" class="stamp" src="images/unsold.png" />
+    <img id="soldstamp" class="stamp" src="images/sold.png" />
+    <div id="auctioncontainer">
+        <span class="aliguetitle">A-Ligue Auction
+            <span class="y2022">2022</span>
+        </span>
+        <p class="beginsin" id="begin">Begins in</p>
+    </div>
+    <div id="countdowncontainer">
+    </div>
+    <div class="activeplayercontainer" id="activeplayercontainer">
+        <div id="bidimage">
+            <img id="bimg"
+                src="https://media-exp1.licdn.com/dms/image/C4E03AQHeayJ4ZVXISw/profile-displayphoto-shrink_400_400/0/1622386554440?e=1651104000&v=beta&t=F7jqCFUq6u-zioLNpygnfOJvvfrdV9P5AoWkgchKCEk" />
+        </div>
+        <div class="year">
+            <div id="yearheading" class="bidcardheading">Year</div>
+            <div id="bidyear"></div>
+        </div>
+        <div class="department">
+            <div class="bidcardheading">Department</div>
+            <div id="biddepartment"></div>
+        </div>
+        <div class="name">
+            <div class="bidcardheading">Name</div>
+            <div id="bidname"></div>
+        </div>
+        <div class="positions">
+            <div class="bidcardheading">Positions</div>
+            <div id="bidpositions"></div>
+        </div>
+        <div class="previousteam">
+            <div class="bidcardheading">Previous Team</div>
+            <div id="bidpreviousteam"></div>
+        </div>
+        <div class="bidcontainer">
+
+            <div class="activebidheading">Bid By</div>
+            <div id="activebidteam"></div>
+            <div id="activebidamtheading">Base</div>
+            <div id="activebidamt"></div>
+        </div>
+
+    </div>
+</body>
+<script>
+    const form = {
+        name: document.getElementById("bidname"),
+        pos: document.getElementById("bidpositions"),
+        mlt: document.getElementById("bidpreviousteam"),
+        cteam: document.getElementById("activebidteam"),
+        bid: document.getElementById("activebidamt"),
+        yr: document.getElementById("bidyear"),
+        sts: document.getElementById("sts"),
+        dept: document.getElementById("biddepartment"),
+        playercontainer: document.getElementById("activeplayercontainer"),
+        timer : document.getElementById("countdowncontainer"),
+        amthead : document.getElementById("activebidamtheading"),
+        begin : document.getElementById("begin"),
+        sold: document.getElementById("soldstamp"),
+        unsold: document.getElementById("unsoldstamp")
+    }
+    setInterval(() => {
+        const request1 = new XMLHttpRequest();
+        request1.onload = () => {
+            var responseObject1 = null;
+            try {
+                responseObject1 = JSON.parse(request1.responseText);
+            }
+            catch (e) { console.log("error"); }
+            if (responseObject1) {
+                form.timer.style.display='None';
+                form.playercontainer.style.filter="brightness(100%)"
+                form.sold.style.visibility="hidden";
+                form.unsold.style.visibility="hidden";
+                form.unsold.style.height="70vh";
+                form.unsold.style.width="70vw";
+                form.sold.style.height="70vh";
+                form.sold.style.width="70vw";
+                form.name.innerHTML = responseObject1.name;
+                form.pos.innerHTML = "#1 "+responseObject1.pos1+" #2 "+responseObject1.pos2;
+                form.mlt.innerHTML = responseObject1.mlt;
+                form.bid.innerHTML = responseObject1.base;
+                form.yr.innerHTML = responseObject1.yr;
+                form.dept.innerHTML = responseObject1.dept;
+                form.cteam.innerHTML = responseObject1.cteam;
+                form.bid.textContent+='K';
+            }
+            if (responseObject1.status == 'Selling') {
+                form.begin.textContent="Live Now";
+                form.sold.style.visibility="hidden";
+                form.unsold.style.visibility="hidden";
+                form.cteam.innerHTML = responseObject1.cteam;
+                form.bid.innerHTML = responseObject1.cprice + 'K';
+                form.amthead.textContent="Bid";
+                form.begin.textContent="Live Now";
+            }
+            else if (responseObject1.status == "Not_Sold") {
+                form.playercontainer.style.display = "grid";
+                form.begin.textContent="Live Now";
+            }
+            else if (responseObject1.status == 'Start') {
+                form.playercontainer.style.display = 'None';
+                form.timer.style.display='block';
+
+            }
+            else if (responseObject1.status == "Unsold") {
+                form.begin.textContent="Live Now";
+                form.playercontainer.style.filter="brightness(80%)"
+                form.playercontainer.style.display="grid";
+                form.sold.style.visibility="hidden";
+                form.unsold.style.visibility="visible";
+                form.unsold.style.height="45vh";
+                form.unsold.style.width="30vw";
+            }
+            else if(responseObject1.status == "Unsold_Sell"){
+                form.begin.textContent="Live Now";
+                form.cteam.innerHTML=responseObject1.cteam;
+                form.playercontainer.style.display="grid";
+            }
+            else if(responseObject1.status== "Unsold_Again"){
+                form.begin.textContent="Live Now";
+                form.sold.style.visibility="hidden";
+                form.unsold.style.visibility="visible";
+                form.unsold.style.height="45vh";
+                form.unsold.style.width="30vw";
+            }
+            else if (responseObject1.status == "Sold") {
+                form.bid.innerHTML = responseObject1.cprice+ 'K';
+                form.playercontainer.style.filter="brightness(80%)"
+                form.unsold.style.visibility="hidden";
+                form.sold.style.visibility="visible";
+                form.sold.style.height="45vh";
+                form.sold.style.width="30vw";
+            }
+            else if(responseObject1.status=='End'){
+                form.playercontainer.style.display="none";
+                form.timer.style.display='None';
+                form.begin.textContent="Ended!";
+            }
+
+        }
+        requestdata = `ok=${true}`;
+        request1.open("post", "auctiontv.php");
+        request1.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        request1.send(requestdata);
+    }, 1000);
+
+    var targetDate = new Date("26 Sep, 2022 10:30:00").getTime();
+    var update = setInterval(function () {
+        var currDate = new Date().getTime();
+        var distance = targetDate - currDate;
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / (1000));
+
+        document.getElementById("countdowncontainer").innerHTML = '<span class="time">' + days + '</span><span class="timewords">days</span>' +
+            '<span class="time">&nbsp;' + hours + '</span><span class="timewords">hours</span>' +
+            '<span class="time">&nbsp;' + minutes + '</span><span class="timewords">minutes</span>' +
+            '<span class="time">&nbsp;' + seconds + '</span><span class="timewords">seconds</span>';
+
+        if (distance < 0) {
+            clearInterval(update);
+            document.getElementById("countdowncontainer").innerHTML = '<p class="time">Starting Soon!</p>';
+        }
+    }, 1000);
+</script>
+
+</html>

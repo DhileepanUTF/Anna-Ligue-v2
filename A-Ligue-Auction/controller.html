@@ -1,0 +1,218 @@
+<html>
+    <head>
+        <title>
+            Auction Controler
+        </title>
+    </head>
+    <style>
+        body{
+            font-weight: bold;
+            top :10%;
+            left : 30%;
+            font-size:large;
+            position: absolute;
+        }
+        #home{
+            background-color: white;
+            border: 1px solid blueviolet;
+            color: blue;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 10px 100px;
+            max-width: 550px; 
+            font-size: x-large;
+            display : none;
+        }
+        #bid{
+            background-color: white;
+            border: 1px solid blueviolet;
+            color: blue;
+            font-weight: bold;
+            margin-bottom: 10px;
+            padding: 10px 100px;
+            max-width: 550px; 
+            font-size: x-large;
+            display: none;
+        }
+        #btn{
+            display : none;
+        }
+        #nxt{
+            display : none;
+        }
+    </style>
+    <body>
+        <div id="Start">
+            <button id="start">Start Auction</button>
+        </div>
+        <div id="home">
+            <pre id="pinfo"></pre>
+        </div>
+        <div id="bid">
+            <pre id="bidinfo"></pre>
+        </div>
+        <div id="btn">
+        &emsp;&emsp;<button id="dd" class="btn">Dribbling Demons</button>&emsp;<button id="sh" class="btn">Soccor Hooligans</button>
+        &emsp;<br><br><button id="jg"  class="btn">Juggling Giants</button>&emsp;<button id="fp" class="btn">Faking Phantoms</button>&emsp;
+        <button id="nb" class="btn">Net Busters</button>
+        <br><br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        </div>
+        <button id="nxt" class="btn">Unsold</button>
+        <div id="purse">
+            <p>&emsp;&emsp;Purse</p>
+            <p id="ddp">DD : 100</p>
+            <p id="shp">SH : 100</p>
+            <p id="jgp">JG : 100</p>
+            <p id="fpp">FP : 100</p>
+            <p id="nbp">NB : 100</p>
+            <p>&emsp;&emsp;Player Info</p>
+            <p id="rp">Rem : 10</p>
+            <p id="sp">Sold : 0</p>
+            <p id="up">Unsold : 0</p>
+        </div>
+    </body>
+    <script>
+        const form={
+            pinfo : document.getElementById("pinfo"),
+            home : document.getElementById('home'),
+            bidinfo : document.getElementById("bidinfo"),
+            start : document.getElementById("start"),
+            Start : document.getElementById("Start"),
+            bid : document.getElementById("bid"),
+            dd : document.getElementById("dd"),
+            sh : document.getElementById("sh"),
+            jg : document.getElementById("jg"),
+            fp : document.getElementById("fp"),
+            nb : document.getElementById("nb"),
+            nxt : document.getElementById('nxt'),
+            btn : document.getElementById('btn'),
+            ddp : document.getElementById("ddp"),
+            shp : document.getElementById("shp"),
+            jgp : document.getElementById("jgp"),
+            fpp : document.getElementById("fpp"),
+            nbp : document.getElementById("nbp"),
+            rp : document.getElementById("rp"),
+            sp : document.getElementById("sp"),
+            up : document.getElementById("up"),
+        }
+        //var x=Math.floor((Math.random()*100)+1);
+        form.start.addEventListener('click',() =>{
+            next();
+            form.btn.style.display='block';
+            form.Start.style.display='none';
+            form.home.style.display='block';
+            form.nxt.style.display='block';
+        });
+        form.nxt.addEventListener('click',() =>{
+            if((form.nxt.textContent)!='Next'){
+                save();
+                form.nxt.textContent='Next';
+                form.btn.style.display="none";
+                form.nxt.style.display='block';
+            }
+            else{
+                form.nxt.textContent='Unsold';
+                form.btn.style.display="block";
+                next();
+            }
+
+        });
+        form.dd.addEventListener('click',() =>{
+            team(1);
+        })
+        form.sh.addEventListener('click',() =>{
+            team(2);
+        })
+        form.jg.addEventListener('click',() =>{
+            team(3);
+        })
+        form.fp.addEventListener('click',() =>{
+            team(4);
+        })
+        form.nb.addEventListener('click',() =>{
+            team(5);
+        })
+        function next(){
+            form.btn.style.display='block';
+            const req = new XMLHttpRequest();
+            req.onload = () => {
+            var resObj = null;
+            try {
+                resObj=JSON.parse(req.responseText);
+            } 
+            catch (e) {console.log("nxt error");}
+            if((resObj.status).localeCompare("End")){
+                form.pinfo.textContent="\t\t Player Info \n\nName : "+resObj.name+"\t\nDept : "+resObj.dept+"\t\nYear : "+resObj.yr+"\nPosition1 : "+resObj.pos1+"\nPosition2 : "+resObj.pos2+"\t\nMini_Ligue : "+resObj.mlt+"\t\nStatus : "+resObj.status+"\nBase : "+resObj.base+"\tPhone : "+resObj.ph;
+                form.bid.style.display="none";
+            }
+            else{
+                form.pinfo.textContent="Auction Ended";
+                form.btn.style.display='none';
+                form.bid.style.display="none";
+                form.nxt.style.display="none";
+            }
+        }
+        requestdata=`nxt=${true}`;
+        req.open("post","auctioncon.php");
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.send(requestdata);
+        }
+        function save(){
+            const req = new XMLHttpRequest();
+            req.onload = () => {
+            var resObj = null;
+            try {
+                resObj=JSON.parse(req.responseText);
+            } 
+            catch (e) {console.log("error");}
+            form.ddp.innerHTML="DD : "+resObj[2];
+            form.shp.innerHTML="SH : "+resObj[1];
+            form.jgp.innerHTML="JG : "+resObj[0];
+            form.fpp.innerHTML="FP : "+resObj[4];
+            form.nbp.innerHTML="NB : "+resObj[3];
+            form.rp.innerHTML="Rem : "+resObj[5];
+            form.sp.innerHTML="Sold : "+resObj[6];
+            form.up.innerHTML="Unsold : "+resObj[7];
+        }
+        requestdata=`sv=${true}`;
+        req.open("post","auctioncon.php");
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.send(requestdata);
+        }
+        function team(x){
+            const req = new XMLHttpRequest();
+            req.onload = () => {
+            var resObj = null;
+            try {
+                resObj=JSON.parse(req.responseText);
+            } 
+            catch (e) {console.log("error");}
+            if(resObj){
+                form.bid.style.display='block';
+                form.bidinfo.textContent="\tCurrent Bid\n\n";
+                form.nxt.textContent='Sold';
+                if(x==1){
+                    form.bidinfo.textContent+="Team : Dribbling Demons";
+                }
+                else if(x==2){
+                    form.bidinfo.textContent+="Team : Soccor Hooligans";
+                }
+                else if(x==3){
+                    form.bidinfo.textContent+="Team : Juggling Giants";
+                }
+                else if(x==4){
+                    form.bidinfo.textContent+="Team : Faking Phantoms";
+                }
+                else if(x==5){
+                    form.bidinfo.textContent+="Team : Net Busters";
+                }
+                form.bidinfo.textContent+="\nPrice : "+resObj.cp;
+            }
+        }   
+        requestdata=`team=${true}&n=${x}`;
+        req.open("post","auctioncon.php");
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.send(requestdata);
+        }
+    </script>
+</html>

@@ -1,0 +1,191 @@
+<html>
+
+<head>
+    <title>
+        Homepage
+    </title>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        .body{
+            overflow-x: hidden;
+            height: 95vh;
+            width: 100vw;
+            text-align: center;
+        }
+        #homepageheader {
+            background-color: #e7e7e7;
+        }
+
+        .bgimg {
+            z-index: 2;
+            position: fixed;
+            object-fit: cover;
+            width: 70%;
+            height: 120%;
+            top: -80px;
+            right: 0px;
+            overflow: hidden;
+            margin-right: -250px;
+            border-radius: 0 250px 250px 0;
+            transform: matrix(-1, 0, 0, 1, 0, 0);
+        }
+
+        #btncontainer{
+            position: absolute;
+            width: 100vw;
+            height: fit-content;
+            top:70%;
+
+        }
+
+        #titlecontainer{
+            position: absolute;
+            width: 100vw;
+            height: fit-content;
+            top: 10%;
+
+        }
+        #y2022container{
+            position: absolute;
+            width: 100vw;
+            height: fit-content;
+            top:15%;
+        }
+
+        #homepagetitle {
+            font-family: Oswald, sans-serif;
+            font-style: normal;
+            font-weight: bolder;
+            color: #000000;
+            font-size: 5rem;
+            padding-left: 2%;
+            margin-bottom: 0rem;
+        }
+
+        #homepagey2022 {
+            font-size: 7rem;
+            font-family: Oswald, sans-serif;
+            font-style: normal;
+            font-weight: bolder;
+            color: #849fff;
+            padding-left: 25%;
+        }
+
+        .animatedbtn {
+            font-family: Bebas Neue;
+            font-style: cursive;
+            width: 20rem;
+            height: 6rem;
+            margin-left: 10%;
+            color: rgb(255, 255, 255);
+            font-size: 2.5rem;
+            background-color: #637EE1;
+            border: 1px solid #fdfeff;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .animatedbtn:hover {
+            box-shadow: 10px 10px rgb(35, 36, 99);
+        }
+
+        .animatedbtn:active {
+            background-color: #112D57;
+            box-shadow: 10px 10px rgb(35, 36, 99);
+        }
+
+        @media screen and (max-width:1250px) {
+            html {
+                font-size: 14px;
+            }
+        }
+
+        @media screen and (max-width:1100px) {
+
+            #titlecontainer{
+                text-align: center;
+                top: 6%;
+            }
+            #y2022container{
+                text-align: center;
+                top:17%;
+            }
+            
+            #homepagetitle {
+                font-size: 7rem;
+                color: #fdfeff;
+                padding-left: 0rem;
+            }
+
+            #homepagey2022 {
+                font-size: 8rem;
+                padding-left: 0rem;
+            }
+
+            #btncontainer{
+                text-align: center;
+            }
+            .animatedbtn
+            {
+                margin-left: 0rem;
+            }
+
+            .bgimg {
+                z-index: -1;
+                border-radius: 0 0 0 0;
+                width: 120%;
+                top: 20px;
+                left: -150px;
+                filter: blur(2px) brightness(50%);
+            }
+        }
+
+        @media screen and (max-width:700px){
+            html{
+                font-size: 11.5px;
+            }
+            .bgimg{
+                left:-10px;
+            }
+            .animatedbtn{
+                width: 22rem;
+                height: 7rem;
+                font-size: 3rem;
+            }
+        }
+         @media screen and (max-width:580px){
+             .header{
+                 font-size: 1.1rem;
+                 padding-left: 0rem;
+             }
+             #y2022container{
+                 top: 25%;
+             }
+             #homepagetitle{
+                 font-size: 7rem;
+                 line-height: 7rem;
+             }
+            .animatedbtn{
+                width: 20rem;
+                height: 7rem;
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="bodygrey">
+    <img class="bgimg" src="images/goldengavel.jpg" />
+    <div class="headerdiv" id="homepageheader">
+        <a href="index.html"><img class="aliguelogo" src="images/aliguelogo.png" /></a>
+        <a href="index.html" class="header">Homepage</a>
+        <a href="auction.html" class="header">Auction</a>
+        <a href="teams.html" class="header">Teams</a>
+        <a href="contactus.html" class="header">Contact Us</a>
+    </div>
+    <div id="titlecontainer"><p id="homepagetitle">A-LIGUE AUCTION</p></div>
+    <div id="y2022container"><p id="homepagey2022">2022</p></div>
+    <div id="btncontainer"><button class="animatedbtn" onclick='location.href="auction.html"'>Watch Live</button></div>
+</body>
+
+</html>

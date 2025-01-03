@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <style>
+        body {
+            background: url('images/bgvertical.jpg');
+            background-repeat: repeat-y;
+            background-position-y: -10rem;
+        }
+
+        .headerdiv {
+            background-color: #87c8d8;
+        }
+
+        #mobileplayers {
+            display: none;
+        }
+
+        #teamscontainer {
+            margin-top: 5%;
+            margin-left: 1rem;
+            display: grid;
+            grid-gap: 0.5rem;
+            height: fit-content;
+            width: 95vw;
+            grid-template-columns: auto;
+            grid-template-rows: 0.4fr 0.6fr;
+            grid-template-areas:
+                "tbox"
+                "pbox";
+
+        }
+
+        #teaminfo {
+            grid-area: tbox;
+            display: grid;
+            grid-gap: 2rem;
+            grid-template-columns: repeat(6, 1.67fr);
+            grid-template-rows: auto;
+            grid-template-areas:
+                "t1 t2 t3 t4 t5 t6";
+        }
+
+        #players {
+            display: grid;
+            margin-top: 3%;
+            grid-area: pbox;
+            grid-gap: 2rem;
+            grid-template-columns: repeat(2, 0.5fr);
+            grid-template-rows: repeat(2, 0.5fr);
+            grid-template-rows: auto;
+            grid-template-areas:
+                "atk mid"
+                "def gk";
+        }
+
+        #team1 {
+            grid-area: t1;
+            background-image: linear-gradient(#86080c, #db6a55, #d47f90);
+        }
+
+        #team2 {
+            grid-area: t2;
+            background-image: linear-gradient(rgb(13, 78, 13), rgb(57, 116, 23), #24C629);
+        }
+
+        #team3 {
+            grid-area: t3;
+            background-image: linear-gradient(rgb(95, 66, 148), rgb(53, 20, 53), rgb(4, 3, 22));
+        }
+
+        #team4 {
+            grid-area: t4;
+            background-image: linear-gradient(#ffb824, #e82f34, #69081c);
+        }
+
+        #team5 {
+            grid-area: t5;
+            background-image: linear-gradient(#728b9a, #24354a, #050508);
+        }
+
+        #team6 {
+            grid-area: t6;
+            background-image: linear-gradient(#5c0808, #b32727, #6b0c0e);
+        }
+
+        #gk {
+            grid-area: gk;
+            display: none;
+        }
+
+        #atk {
+            grid-area: atk;
+            display: none;
+        }
+
+        #mid {
+            grid-area: mid;
+            display: none;
+        }
+
+        #def {
+            grid-area: def;
+            display: none;
+        }
+
+
+        .teams {
+            color: white;
+            font-weight: bold;
+            font-family: 'Cinzel';
+            background-color: #353431;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 6px 6px 10px black;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .teams:hover {
+            transform: scale(1.1, 1.1);
+            box-shadow: 0px 0px 10px rgb(66, 15, 250);
+        }
+
+        .highlight {
+
+            box-shadow: 0px 0px 15px rgb(246, 250, 6);
+            
+            color: white;
+            font-weight: bold;
+            font-family: 'Cinzel';
+            background-color: #353431;
+            border-radius: 1rem;
+            text-align: center;
+            transform: scale(1.1, 1.1);
+            transition: all 0.2s ease-in-out;
+        }
+        .unhighlight {
+
+            box-shadow:none;
+            height: 220px;
+            color: white;
+            font-weight: bold;
+            font-family: 'Cinzel';
+            background-color: #353431;
+            border-radius: 1rem;
+            text-align: center;
+            transform: scale(1, 1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        .list {
+            background-color: #FBAA60;
+            font-family: 'Chakra Petch', sans-serif;
+            border-radius: 1rem;
+            height: fit-content;
+            font-size: 1.3rem;
+            color: rgb(41, 6, 6);
+            transition: all 0.2s ease-in-out;
+            /* display:none; */
+        }
+
+        .list:hover {
+            transform: scale(0.97, 0.97);
+        }
+
+        .teamlogo {
+            padding-top: 1rem;
+            height: 50%;
+            width: 60%;
+        }
+
+        .teamname {
+            font-family: 'Eagle Lake';
+            font-weight: bold;
+            color: rgb(240, 240, 240);
+            font-size: 1.1rem;
+        }
+
+        .positionhead {
+            color: #7F0131;
+            border-radius: 1rem 1rem 0 0;
+            box-shadow: 1px 1px 5px black;
+            background-color: #d45d18;
+            margin-top: 0rem;
+            margin-bottom: 0rem;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            font-size: 2.5rem;
+            width: 100%;
+            text-align: center;
+        }
+
+        .positionicons {
+            height: 35px;
+            width: 35px;
+            padding-right: 0.5rem;
+        }
+
+        .listhead {
+            margin-top: 0rem;
+            margin-bottom: 0.2rem;
+            display: grid;
+            color: #331616;
+            font-weight: bold;
+            padding-bottom: 0.3rem;
+            background-color: #eab676;
+            border-radius: 0 0 1rem 1rem;
+            box-shadow: 1px 1px 5px black;
+            padding-top: 0.2rem;
+            grid-template-columns: 0.1fr 0.4fr auto 0.2fr;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "hs hn hd hy";
+        }
+
+        #headsno {
+            grid-area: hs;
+            padding-left: 1rem;
+        }
+
+        #headname {
+            grid-area: hn;
+            padding-left: 1.5rem;
+
+        }
+
+        #headdept {
+            grid-area: hd;
+            padding-left: 7rem;
+
+        }
+
+        #headyear {
+            grid-area: hy;
+
+        }
+
+        ol {
+            padding-left: 2rem;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        li {
+            margin-left: 2%;
+            padding-bottom: 0.2rem;
+        }
+
+        .listitems {
+            display: grid;
+            line-height: 1.4rem;
+            margin-left: 0.7rem;
+            grid-template-columns: 0.45fr 0.45fr auto;
+            grid-template-rows: auto;
+            grid-template-areas:
+                "pn pd py";
+        }
+
+        .playername {
+            grid-area: pn;
+            padding-left: 1.3rem;
+            width: 85%;
+            text-overflow: ellipsis;
+
+        }
+
+        .playerdept {
+            grid-area: pd;
+            width: 95%;
+            text-overflow: ellipsis;
+
+        }
+
+        .playeryear {
+            grid-area: py;
+            padding-left: 1rem;
+            text-overflow: ellipsis;
+
+        }
+
+        @media screen and (max-width:1150px) {
+            body {
+                background-size: 150%;
+            }
+
+            #teamscontainer {
+                margin-top: 8%;
+            }
+        }
+
+        @media screen and (max-width:950px) {
+            body {
+                background-position-y: 0rem;
+            }
+
+            #teamscontainer {
+                display: block;
+                margin-left: 2%;
+                margin-right: 2%;
+            }
+
+            #teaminfo {
+                display: flexbox;
+                overflow-x: auto;
+                height: fit-content;
+                text-align: center;
+                padding: 3rem;
+                padding-left: 2rem;
+                margin-right: 1rem;
+            }
+
+            .teams {
+                width: 20vw;
+            }
+
+            .listhead {
+                grid-template-columns: 0.1fr 0.4fr auto 0.3fr;
+                grid-template-rows: auto;
+                grid-template-areas:
+                    "hs hn hd hy";
+            }
+        }
+
+        @media screen and (max-width:690px) {
+            .teams {
+                width: 25vw;
+            }
+            .teams:hover {
+            transform: scale(1.1,1.1);
+            box-shadow: 0px 0px 10px rgb(6, 248, 79);
+        }
+
+            .header {
+                font-size: 1.8rem;
+                padding-top: 0.2rem;
+            }
+
+            #players {
+                display: none;
+            }
+
+            #mobileplayers {
+                display: block;
+                margin-top: 2rem;
+            }
+
+            #mobilehead {
+                display: flex;
+                overflow-x: auto;
+                height: fit-content;
+                padding-bottom: 2rem;
+                padding-right: 2rem;
+                white-space: nowrap;
+            }
+
+            .positionhead {
+                text-align: justify;
+                border-radius: 10px;
+                vertical-align: middle;
+                font-size: 2.5rem;
+                padding: 1rem;
+                margin: 1rem;
+                margin-top: 2rem;
+                background-color: #ff8902;
+                font-weight: bold;
+                font-family: 'Helvetica Neue';
+                color: #000000;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .positionhead:hover,
+            .positionhead:active {
+                transform: scale(1.1, 1.1);
+                background-color: #c50427;
+                color: white;
+                box-shadow: 4px 4px rgb(20, 14, 1);
+            }
+
+            .positionicons {
+                height: 26px;
+                width: 26px;
+            }
+
+            #mobileplayercontent {
+                background-color: #eab676;
+                padding-bottom: 1rem;
+                border-radius: 5px;
+                margin-top: 3rem;
+                margin: 2rem;
+            }
+
+            .listhead {
+                font-size: 2rem;
+                border-radius: 5px;
+                background-color: #f16346;
+            }
+
+            ol {
+                font-family: 'Chakra Petch', sans-serif;
+                height: fit-content;
+            }
+
+            .listitems {
+                line-height: 2rem;
+                font-size: 1.8rem;
+            }
+
+            #headdept {
+                padding-left: 8rem;
+            }
+
+            #headyear {
+                padding-left: 1rem;
+            }
+
+        }
+
+        @media screen and (max-width:400px) {
+            .teams {
+                width: 35vw;
+                height: 25vh;
+            }
+
+            #mobileplayers {
+                margin-top: 0.5rem;
+            }
+
+            .listitems {
+                line-height: 1.8rem;
+            }
+
+            .positionicons {
+                height: 22px;
+                width: 22px;
+            }
+
+            .listhead {
+                font-size: 1.4rem;
+            }
+
+
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="headerdiv" id="homepageheader">
+        <a href="homepage.html"><img class="aliguelogo" src="images/aliguelogo.png" /></a>
+        <a href="homepage.html" class="header">Homepage</a>
+        <a href="auction.html" class="header">Auction</a>
+        <a href="teams.html" class="header">Teams</a>
+        <a href="contactus.html" class="header">Contact Us</a>
+    </div>
+    <div id="teamscontainer">
+        <div id="teaminfo">
+            <div id="team1" class="teams" onclick="run(3)">
+                <img class="teamlogo" src="images/jg.png" />
+                <br>
+                <div id="jg">
+                    <p class="teamname">Juggling Giants</p>Captain:<br>Owner:
+
+                </div>
+            </div>
+            <div id="team2" class="teams" onclick="run(2)">
+                <img class="teamlogo" src="images/h.png" />
+                <br>
+                <div id="sh">
+                    <p class="teamname">Soccer Hooligans</p>Captain:<br>Owner:
+
+                </div>
+
+            </div>
+            <div id="team3" class="teams" onclick="run(4)">
+                <img class="teamlogo" src="images/fp.png" />
+                <br>
+                <div id="fp">
+                    <p class="teamname">Faking Phantoms</p>Captain:<br>Owner:
+
+                </div>
+
+            </div>
+            <div id="team4" class="teams" onclick="run(5)">
+                <img class="teamlogo" src="images/nb.png" />
+                <br>
+                <div id="nb">
+                    <p class="teamname">Net Busters</p>Captain:<br>Owner:
+
+                </div>
+
+            </div>
+            <div id="team5" class="teams" onclick="run(1)">
+                <img class="teamlogo" src="images/dd.png" />
+                <br>
+                <div id="dd">
+                    <p class="teamname">Dribbling Demons</p>Captain:<br>Owner:
+
+                </div>
+
+            </div>
+            <div id="team6" class="teams" onclick="run(6)">
+                <img class="teamlogo" src="images/tt.png" />
+                <br>
+                <div id="tt">
+                    <p class="teamname">Tackling Titans</p>Captain:<br>Owner:
+
+                </div>
+
+            </div>
+        </div>
+        <div id="players">
+            <div id="gk" class="list">
+                <p class="positionhead"><img src="images/gk.png" class="positionicons" />Goal Keepers</p>
+                <p class="listhead"><span id="headsno">SNo</span><span id="headname">Name</span><span
+                        id="headdept">Department</span><span id="headyear">Year</span></p>
+                <ol id="gklist">
+                </ol>
+
+            </div>
+            <div id="atk" class="list">
+                <p class="positionhead"><img src="images/atk.png" class="positionicons" />Forwards</p>
+                <p class="listhead"><span id="headsno">SNo</span><span id="headname">Name</span><span
+                        id="headdept">Department</span><span id="headyear">Year</span></p>
+                <ol id="atklist">
+                </ol>
+
+            </div>
+            <div id="mid" class="list">
+                <p class="positionhead"><img src="images/mid.png" class="positionicons" />Midfielders</p>
+                <p class="listhead"><span id="headsno">SNo</span><span id="headname">Name</span><span
+                        id="headdept">Department</span><span id="headyear">Year</span></p>
+                <ol id="midlist">
+                </ol>
+
+            </div>
+            <div id="def" class="list">
+                <p class="positionhead"><img src="images/def.png" class="positionicons" />Defenders</p>
+                <p class="listhead"><span id="headsno">SNo</span><span id="headname">Name</span><span
+                        id="headdept">Department</span><span id="headyear">Year</span></p>
+                <ol id="deflist">
+                </ol>
+
+            </div>
+        </div>
+        <div id="mobileplayers">
+            <div id="mobilehead">
+                <div class="positionhead" id="Forbtn" value="For"><img src="images/atk.png"
+                        class="positionicons" />Forwards</div>
+                <div class="positionhead" id="Midbtn" value="Mid"><img src="images/mid.png"
+                        class="positionicons" />Midfielders</div>
+                <div class="positionhead" id="Defbtn" value="Def"><img src="images/def.png"
+                        class="positionicons" />Defenders</div>
+                <div class="positionhead" id="GKbtn" value="GK"><img src="images/gk.png" class="positionicons" />Goal
+                    Keepers</div>
+            </div>
+            <div id="mobileplayercontent">
+                <p class="listhead"><span id="headsno">SNo</span><span id="headname">Name</span><span
+                        id="headdept">Department</span><span id="headyear">Year</span></p>
+                <ol id="mobileol">
+                </ol>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script>
+    jg = document.getElementById("team1");
+    dd = document.getElementById("team5");
+    sh = document.getElementById("team2");
+    fp = document.getElementById("team3");
+    nb = document.getElementById("team4");
+    tt = document.getElementById("team6");
+    var mid = document.getElementById("midlist");
+    var gk = document.getElementById("gklist");
+    var def = document.getElementById("deflist");
+    var atk = document.getElementById("atklist");
+    var middiv = document.getElementById("mid");
+    var atkdiv = document.getElementById("atk");
+    var defdiv = document.getElementById("def");
+    var gkdiv = document.getElementById("gk");
+    var bool = 0;
+    var prev = 0;
+    var prev2 = 0;
+
+    // Mobile container display
+    var mobilecontainer = document.getElementById("mobileplayercontent");
+    function run(n) {
+        mobilecontainer.style.display = "none";
+        bool = n;
+        check(n);
+    }
+
+    function check(x) {
+        bglit();
+        const req = new XMLHttpRequest();
+        req.onload = () => {
+
+            var resObj = null;
+            try {
+                resObj = JSON.parse(req.responseText);
+            } catch (error) {
+            }
+            if (resObj) {
+                var checkmobile = window.matchMedia("(max-width:690px)");
+                if (checkmobile.matches) {
+                    mobileloader(resObj);
+                }
+                else {
+                    loader(resObj);
+                }
+            }
+        }
+        var requestdata = `team1=${true}&n=${x}`;
+        req.open("post", "teams.php");
+        req.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        req.send(requestdata);
+        if (bool != 0 && bool != prev) {
+            middiv.style.display = 'block';
+            gkdiv.style.display = 'block';
+            defdiv.style.display = 'block';
+            atkdiv.style.display = 'block';
+            prev = bool;
+            prev2 = bool;
+        }
+        else if (bool === prev) {
+            middiv.style.display = 'none';
+            gkdiv.style.display = 'none';
+            defdiv.style.display = 'none';
+            atkdiv.style.display = 'none';
+            dd.classList.remove('highlight');
+            sh.classList.remove('highlight');
+            jg.classList.remove('highlight');
+            fp.classList.remove('highlight');
+            nb.classList.remove('highlight');
+            tt.classList.remove('highlight');
+            prev = 0;
+        }
+    }
+
+    //mobile 
+    var mobileol = document.getElementById("mobileol");
+
+    function mobileloader(obj) {
+        forbtn = document.getElementById("Forbtn");
+        midbtn = document.getElementById("Midbtn");
+        defbtn = document.getElementById("Defbtn");
+        gkbtn = document.getElementById("GKbtn");
+        // bglit();
+        forbtn.addEventListener('click', () => {
+            mobilecontainer.style.display = 'block';
+            displayplayermobile(forbtn.getAttribute('value'), obj);
+        });
+        midbtn.addEventListener('click', () => {
+            mobilecontainer.style.display = 'block';
+            displayplayermobile(midbtn.getAttribute('value'), obj);
+        });
+        defbtn.addEventListener('click', () => {
+            mobilecontainer.style.display = 'block';
+            displayplayermobile(defbtn.getAttribute('value'), obj);
+        });
+        gkbtn.addEventListener('click', () => {
+            mobilecontainer.style.display = 'block';
+            displayplayermobile(gkbtn.getAttribute('value'), obj);
+        });
+    }
+
+    function displayplayermobile(pos, obj) {
+        mobileol.innerHTML = '';
+        var n = obj.length;
+        for (let i = 0; i < (n - 1); i++) {
+            if (obj[i + 1] === pos) {
+                var li = document.createElement('li');
+                li.innerHTML = "<span class='listitems'><span class='playername'>" + obj[i] + "</span><span class='playerdept'>" + obj[i + 2] + "</span><span class='playeryear'>" + obj[i + 3] + "</span></span>";
+                mobileol.appendChild(li);
+            }
+        }
+    }
+
+    function loader(obj) {
+        mid.innerHTML = '';
+        atk.innerHTML = '';
+        def.innerHTML = '';
+        gk.innerHTML = '';
+        var n = obj.length;
+        for (let i = 0; i < (n - 1); i++) {
+            if (obj[i + 1] === 'Mid') {
+                var li = document.createElement('li');
+                li.innerHTML = "<span class='listitems'><span class='playername'>" + obj[i] + "</span><span class='playerdept'>" + obj[i + 2] + "</span><span class='playeryear'>" + obj[i + 3] + "</span></span>";
+                mid.appendChild(li);
+            }
+            else if (obj[i + 1] === 'Def') {
+                var li = document.createElement('li');
+                li.innerHTML = "<span class='listitems'><span class='playername'>" + obj[i] + "</span><span class='playerdept'>" + obj[i + 2] + "</span><span class='playeryear'>" + obj[i + 3] + "</span></span>";
+                def.appendChild(li);
+            }
+            else if (obj[i + 1] === 'For') {
+                var li = document.createElement('li');
+                li.innerHTML = "<span class='listitems'><span class='playername'>" + obj[i] + "</span><span class='playerdept'>" + obj[i + 2] + "</span><span class='playeryear'>" + obj[i + 3] + "</span></span>";
+                atk.appendChild(li);
+            }
+            else if (obj[i + 1] === 'GK') {
+                var li = document.createElement('li');
+                li.innerHTML = "<span class='listitems'><span class='playername'>" + obj[i] + "</span><span class='playerdept'>" + obj[i + 2] + "</span><span class='playeryear'>" + obj[i + 3] + "</span></span>";
+                gk.appendChild(li);
+            }
+
+        }
+    }
+    function bglit() {
+        dd.classList.remove('highlight');
+        sh.classList.remove('highlight');
+        jg.classList.remove('highlight');
+        fp.classList.remove('highlight');
+        nb.classList.remove('highlight');
+        tt.classList.remove('highlight');
+
+        if (bool == prev2) {
+            dd.classList.remove('highlight');
+            sh.classList.remove('highlight');
+            jg.classList.remove('highlight');
+            fp.classList.remove('highlight');
+            nb.classList.remove('highlight');
+            tt.classList.remove('highlight');
+            prev2 = 0;
+        }
+        if (bool == 3) {
+            jg.classList.add('highlight');
+            
+
+
+        }
+        else if (bool == 1) {
+            dd.classList.add('highlight');
+        }
+        else if (bool == 2) {
+            sh.classList.add('highlight');
+        }
+        else if (bool == 4) {
+            fp.classList.add('highlight');
+        }
+        else if (bool == 5) {
+            nb.classList.add('highlight');
+
+        }
+        else {
+            tt.classList.add('highlight');
+        }
+
+    }
+
+</script>
+
+</html>

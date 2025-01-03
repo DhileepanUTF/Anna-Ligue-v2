@@ -1,0 +1,278 @@
+<html>
+
+<head>
+    <title>
+        A-Ligue feedback
+    </title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<style>
+    body {
+        background-image: url('https://wallpaper.dog/large/20364175.jpg');
+        background-position-y: -5rem;
+    }
+
+    .headerdiv {
+        background-color: #daf1ff;
+    }
+
+    .contactuscontainer {
+        display: grid;
+        margin-top: 5%;
+        margin-left: 5%;
+        margin-right: 5%;
+        grid-column-gap: 5rem;
+        grid-template-columns: 0.33fr 0.33fr 0.33fr;
+        grid-template-rows: auto;
+        grid-template-areas:
+            " d a p";
+    }
+
+    .card {
+        min-width: 90%;
+        height: fit-content;
+        margin: 2rem;
+        text-align: center;
+        color: white;
+        font-size: 2rem;
+        border-radius: 2rem;
+        box-shadow: 0 0 1rem black;
+    }
+
+    .imgcontainer {
+        background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/27e8d40b-71c2-45ea-82f9-e020bad58d0c/db9snou-ebd90e20-a027-4a7f-8ba1-a4097ba340d2.jpg/v1/fill/w_622,h_350,q_70,strp/landscape__12____japanese_pagoda_by_ncoll36_db9snou-350t.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NTc3IiwicGF0aCI6IlwvZlwvMjdlOGQ0MGItNzFjMi00NWVhLTgyZjktZTAyMGJhZDU4ZDBjXC9kYjlzbm91LWViZDkwZTIwLWEwMjctNGE3Zi04YmExLWE0MDk3YmEzNDBkMi5qcGciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.47TesA5iFiHhyj65nA6LhFDWetgNLe60eeaz9P7upVo');
+        background-position-y: 19rem;
+        background-attachment: local;
+        height: fit-content;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+    }
+
+    .infocontainer {
+        background-color: #DF2935;
+        margin: 0rem;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        opacity: 0.9;
+        position: relative;
+    }
+
+    #dhilcon {
+        grid-area: d;
+    }
+
+    #ashcon {
+        grid-area: a;
+    }
+
+    #pkcon {
+        grid-area: p;
+    }
+
+    .cphoto {
+        border-radius: 50%;
+        height: 10rem;
+        width: 10rem;
+        padding-top: 1.5rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .cphoto:hover {
+        border-radius: 20%;
+        transform: scale(1.1);
+    }
+
+    .cname {
+        font-family: 'Bangers';
+        font-style: normal;
+        font-size: 2.5rem;
+        margin-bottom: 0rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .cemail {
+        font-size: 1.5rem;
+        font-family: 'Kurale';
+        vertical-align: middle;
+        text-align: center;
+        margin: 0rem;
+        padding: 1rem;
+        padding-bottom: 2rem;
+        background-color: #E03340;
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+    }
+
+    .cphoneno {
+        font-family: 'Chakra Petch';
+        font-size: 1.5rem;
+        text-align: justify;
+        vertical-align: middle;
+        margin: 0rem;
+        padding: 1rem;
+        padding-left: 4rem;
+        background: linear-gradient(-45deg, #ee7752, #23d5ab, #23a6d5, #D02733);
+        background-size: 800% 800%;
+    }
+
+    .cphoneno:hover {
+        animation: gradient 3s ease infinite;
+    }
+
+    .phoneicon {
+        content: url('images/instaicon.png');
+        height: 2.5rem;
+        width: 2.5rem;
+        vertical-align: middle;
+        padding-right: 0.5rem;
+    }
+
+    .emailicon:hover {
+        animation: shake 0.3s ease forwards infinite;
+    }
+
+    .emailicon {
+        content: url('images/mailicon.png');
+        height: 2.5rem;
+        width: 2.5rem;
+        padding-bottom: 0.5rem;
+        vertical-align: middle;
+        padding-right: 0.5rem;
+    }
+
+    a,
+    a:visited,
+    a:hover,
+    a:active {
+        color: inherit;
+        text-decoration-line: none;
+    }
+
+    @keyframes shake {
+        33% {
+            transform: rotate(8deg);
+        }
+
+        66% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(-8deg);
+        }
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background-position: 0% 50%;
+        }
+    }
+
+    @media screen and (max-width:1250px){
+        html{
+            font-size: 12px;
+
+        }
+        .contactuscontainer{
+            grid-gap:0.2rem;
+
+        }
+        .card{
+            margin-top: 5rem;
+        }
+    }
+
+    @media screen and (max-width:900px){
+        .header{
+            font-size: 1.3rem;
+        }
+        body{
+            background-size: auto 120%;
+        }
+        html{
+            font-size: 9.5px;
+        }
+        .cphoneno{
+            text-align: center;
+        }
+        .contactuscontainer{
+            display: block;
+        }
+    }
+</style>
+
+<body>
+    <div class="contactuscontainer">
+        <div class="headerdiv">
+            <a href="index.html"><img class="aliguelogo" src="images/aliguelogo.png" /></a>
+            <a href="homepage.html" class="header">Homepage</a>
+            <a href="auction.html" class="header">Auction</a>
+            <a href="teams.html" class="header">Teams</a>
+            <a href="contactus.html" class="header">Contact Us</a>
+        </div>
+        <div id="dhilcon" class="card">
+            <div class="imgcontainer">
+                <img class="cphoto"
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQHeayJ4ZVXISw/profile-displayphoto-shrink_400_400/0/1622386554440?e=1651104000&v=beta&t=F7jqCFUq6u-zioLNpygnfOJvvfrdV9P5AoWkgchKCEk"
+                    alt="dhilpic">
+                <p class="cname">Dhileepan S</p>
+            </div>
+            <div class="infocontainer">
+                <div class="cphoneno"><img class="phoneicon" /><a href="https://www.instagram.com/dhileep10/"
+                        target="_blank">@dhileep10</a></div>
+                <p class="cemail">
+                    <a href="mailto:dhileepansendhil@gmail.com" target="_blank">
+                        <img class="emailicon" />dhileepansendhil@gmail.com
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div id="ashcon" class="card">
+            <div class="imgcontainer">
+                <img class="cphoto"
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQF6uZS_Skm5Eg/profile-displayphoto-shrink_200_200/0/1628415367407?e=1651104000&v=beta&t=PL9A4lFNoTL3pzzghYp2y-ZuoJwREejZhbMh0YBvrfs"
+                    alt="ashpic">
+                <p class="cname">Ashok G</p>
+            </div>
+            <div class="infocontainer">
+                <p class="cphoneno"><img class="phoneicon" /><a href="https://www.instagram.com/ashok_guru_26/"
+                        target="_blank">@ashok_guru_26</a></p>
+                <p class="cemail">
+                    <a href="mailto:ashokguru1093@gmail.com" target="_blank">
+                        <img class="emailicon" />
+                         ashokguru1093@gmail.com
+                    </a>
+                </p>
+            </div>
+        </div>
+        <div id="pkcon" class="card">
+            <div class="imgcontainer">
+                <img class="cphoto"
+                    src="https://media-exp1.licdn.com/dms/image/C4E03AQGJTWKHzDYqOQ/profile-displayphoto-shrink_100_100/0/1622025349475?e=1651104000&v=beta&t=rh-D6a820GKriepBF1o6MDluyrW4ofJJ5JEZhvi1Lvg"
+                    alt="">
+                <p class="cname">Prateek Kumar</p>
+            </div>
+            <div class="infocontainer">
+                <p class="cphoneno"><img class="phoneicon" /><a href="https://www.instagram.com/kay.prateek/"
+                        target="_blank">@kay.prateek</a></p>
+                <p class="cemail">
+                    <a href="mailto:prateekkumar2811@gmail.com" target="_blank">
+                        <img class="emailicon" />
+                        prateekkumar2811@gmail.com
+                    </a>
+                </p>
+            </div>
+        </div>
+</body>
+
+</html>
